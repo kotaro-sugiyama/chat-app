@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
-<div th:fragment="main_chat(messageForm, roomId)"
-     th:with="mf=${messageForm}, rid=${roomId}"> 
+<div th:fragment="main_chat"> 
   <div class="chat-header">
     <div class="left-header">
       <div class="chat-main">
@@ -16,35 +15,14 @@
   </div>
 
   <div class="messages">
-    <div class="message">
-      <div class="up-message">
-        <div class="message-user">
-          Tom
-        </div>
-        <div class="message-date">
-          2020/3/31(Wed) 12:43:40
-        </div>
-      </div>
-      <div class="down-message">
-        <div class="message-content">
-          おはよう
-        </div>
-      </div>
-    </div>
-
-    <div class="message">
-      <div class="up-message">
-        <div class="message-user">
-          Tom
-        </div>
-        <div class="message-date">
-          2020/3/31(Wed) 12:47:30
-        </div>
-      </div>
-      <div class="down-message">
-        <div class="message-content">
-          こんばんは
-        </div>
+    <div th:each="message : ${messages}" class="message">
+       <div class="up-message">
+         <div class="message-user" th:text="${message.user.name}">ユーザ名</div>
+         <div class="message-date" th:text="${message.createdAt}">日付</div>
+         </div>
+       </div>
+       <div class="down-message">
+         <div class="message-content" th:text="${message.content}">メッセージ内容</div>
       </div>
     </div>
   </div>
