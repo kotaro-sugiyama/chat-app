@@ -33,6 +33,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 
     private final RoomUserRepository roomUserRepository;
 
+    @GetMapping("/")
+    public String index(@AuthenticationPrincipal CustomUserDetail currentUser, Model model){
+      UserEntity user = userRepository.findById(currentUser.getId());
+      model.addAttribute("user", user); 
+      List<RoomUserEntity> roomUserEntities = roomUserRepository.findByUserId(currentUser.getId());
+      List<RoomEntity> roomList = roomUserEntities.stream()
+          .map(RoomUserEntity::getRoom)
+          .collect(Collectors.toList());
+      model.addAttribute("rooms", roomList);
+      return "messages/index";
+    }
+
     @GetMapping("/rooms/new")
     public String showRoomNew(@AuthenticationPrincipal CustomUserDetail currentUser, Model model){
       List<UserEntity> users = userRepository.findAllExcept(currentUser.getId());
