@@ -16,12 +16,15 @@
 
   <div class="messages">
     <div th:each="message : ${messages}" class="message">
-       <div class="up-message">
-         <div class="message-user" th:text="${message.user.name}">ユーザ名</div>
-         <div class="message-date" th:text="${dates.format(message.createdAt, 'yyyy/MM/dd HH:mm:ss')}">日付</div>
-       </div>
-       <div class="down-message">
-         <div class="message-content" th:text="${message.content}">メッセージ内容</div>
+      <div class="upper-message">
+        <div class="message-user" th:text="${message.user.name}">ユーザー名</div>
+        <div class="message-date" th:text="${#dates.format(message.createdAt, 'yyyy/MM/dd HH:mm:ss')}">日付</div>
+      </div>
+      <div class="lower-message">
+        <div class="message-content" th:text="${message.content}">メッセージ内容</div>
+      </div>
+      <div th:if="${message.image}">
+        <img th:src="@{${message.image}}" alt="メッセージ画像" style="width: 500px; height: 500px;"/>
       </div>
     </div>
   </div>
