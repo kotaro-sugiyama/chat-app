@@ -12,4 +12,5 @@ package in.tech_camp.chat_app.entity;
     private String email;
     private String password;
     private List<RoomUserEntity> roomUsers;
+    private List<MessageEntity> messages;
 }
