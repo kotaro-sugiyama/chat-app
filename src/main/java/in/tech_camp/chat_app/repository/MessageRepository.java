@@ -14,7 +14,7 @@ import in.tech_camp.chat_app.entity.MessageEntity;
 
 @Mapper
 public interface MessageRepository {
-  @Insert("INSERT INTO messages (content, room_id, user_id) VALUES (#{content}, #{roomId}, #{userId})")
+  @Insert("INSERT INTO messages(content, image, user_id, room_id) VALUES(#{content}, #{image}, #{user.id}, #{room.id})")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void insert(MessageEntity messageEntity);
 
@@ -22,7 +22,7 @@ public interface MessageRepository {
   @Results(value = {
     @Result(property = "createdAt", column = "created_at"),
     @Result(property = "user", column = "user_id",
-      one = @One(select = "in.tech_camp.chat_app.repository.UserRepository.findById"))
+            one = @One(select = "in.tech_camp.chat_app.repository.UserRepository.findById"))
   })
   List<MessageEntity> findByRoomId(Integer roomId);
 }
