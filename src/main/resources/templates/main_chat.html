@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ja">
-<div th:fragment="main_chat">
+<div th:fragment="main_chat" th:if="${room != null}">
   <div class="chat-header">
     <div class="left-header">
       <div class="chat-main" th:text="${room.name}">ルーム名</div>
@@ -39,4 +37,3 @@
       <input class="form-submit" type="submit" value="送信">
   </form>
 </div>
-</html>
